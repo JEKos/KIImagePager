@@ -144,7 +144,7 @@
 
 - (void) initializeCaption
 {
-    _captionLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, _scrollView.frame.size.width - 10, 20)];
+    _captionLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, _scrollView.frame.size.width, 25)];
     [_captionLabel setBackgroundColor:self.captionBackgroundColor];
     [_captionLabel setTextColor:self.captionTextColor];
     [_captionLabel setFont:self.captionFont];
