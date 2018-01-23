@@ -23,7 +23,6 @@
     UIPageControl *_pageControl;
     UILabel *_countLabel;
     UILabel *_captionLabel;
-    UIView *_imageCounterBackground;
     NSTimer *_slideshowTimer;
     NSUInteger _slideshowTimeInterval;
     NSMutableDictionary *_activityIndicators;
@@ -83,9 +82,6 @@
 
     [self initializeScrollView];
     [self initializePageControl];
-    if(!_imageCounterDisabled) {
-        [self initalizeImageCounter];
-    }
     [self initializeCaption];
 
     if(!self.imageSource)
@@ -114,32 +110,6 @@
                       saturation:(arc4random() % 128 / 256.0) + 0.5
                       brightness:(arc4random() % 128 / 256.0) + 0.5
                            alpha:1];
-}
-
-- (void) initalizeImageCounter
-{
-    _imageCounterBackground = [[UIView alloc] initWithFrame:CGRectMake(_scrollView.frame.size.width-(kOverlayWidth-4),
-                                                                       _scrollView.frame.size.height-kOverlayHeight,
-                                                                       kOverlayWidth,
-                                                                       kOverlayHeight)];
-    _imageCounterBackground.backgroundColor = [UIColor whiteColor];
-    _imageCounterBackground.alpha = 0.7f;
-    _imageCounterBackground.layer.cornerRadius = 5.0f;
-
-    UIImageView *icon = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 18, 18)];
-    [icon setImage:[UIImage imageNamed:@"KICamera"]];
-    icon.center = CGPointMake(_imageCounterBackground.frame.size.width-18, _imageCounterBackground.frame.size.height/2);
-    [_imageCounterBackground addSubview:icon];
-
-    _countLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 48, 24)];
-    [_countLabel setTextAlignment:NSTextAlignmentCenter];
-    [_countLabel setBackgroundColor:[UIColor clearColor]];
-    [_countLabel setTextColor:[UIColor blackColor]];
-    [_countLabel setFont:[UIFont systemFontOfSize:11.0f]];
-    _countLabel.center = CGPointMake(15, _imageCounterBackground.frame.size.height/2);
-    [_imageCounterBackground addSubview:_countLabel];
-
-    if(!_imageCounterDisabled) [self addSubview:_imageCounterBackground];
 }
 
 - (void) initializeCaption
@@ -288,17 +258,6 @@
 - (void)setBounces:(BOOL)bounces {
 	_bounces = bounces;
 	_scrollView.bounces = _bounces;
-}
-
-- (void)setImageCounterDisabled:(BOOL)imageCounterDisabled
-{
-    if (imageCounterDisabled) {
-        [_imageCounterBackground removeFromSuperview];
-    } else {
-        [self addSubview:_imageCounterBackground];
-    }
-
-    _imageCounterDisabled = imageCounterDisabled;
 }
 
 #pragma mark - PageControl Initialization
