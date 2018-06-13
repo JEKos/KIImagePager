@@ -119,7 +119,6 @@
     [_captionLabel setTextColor:self.captionTextColor];
     [_captionLabel setFont:self.captionFont];
 
-    _captionLabel.alpha = 0.7f;
     _captionLabel.layer.cornerRadius = 5.0f;
 
     [self addSubview:_captionLabel];
